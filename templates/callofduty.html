@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call of Duty - Haiti Gaming Hub</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000;
+        }
+
+        body { 
+            /* Points to your COD image in the static folder */
+            background-image: url('/static/cod_bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* iOS 26 Liquid Glass Style */
+        .container { 
+            max-width: 400px;
+            width: 85%;
+            background: rgba(255, 255, 255, 0.45); 
+            -webkit-backdrop-filter: blur(35px) saturate(180%);
+            backdrop-filter: blur(35px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 35px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 { font-size: 38px; font-weight: 800; margin: 0; color: #000; letter-spacing: -1.5px; }
+        p { color: #1d1d1f; margin-bottom: 35px; font-size: 18px; font-weight: 600; opacity: 0.9; }
+        
+        /* Modern Inputs */
+        select, input { 
+            width: 100%; 
+            padding: 20px; 
+            margin: 10px 0; 
+            background: rgba(255, 255, 255, 0.85); 
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #000; 
+            border-radius: 18px; 
+            font-size: 17px; 
+            box-sizing: border-box;
+            appearance: none; 
+            -webkit-appearance: none; 
+            outline: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; 
+            background-position: right 18px center; 
+            background-size: 16px;
+        }
+
+        .pay-moncash { background: #ff3b30; color: #fff; border: none; padding: 18px; border-radius: 50px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 15px; }
+        .pay-natcash { background: #007aff; color: #fff; border: none; padding: 18px; border-radius: 50px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; }
+
+        .back { display: block; margin-top: 35px; color: #000; text-decoration: none; font-size: 15px; font-weight: 600; opacity: 0.7; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Call of Duty</h1>
+        <p>Place Your Order</p>
+        <form>
+            <select id="service">
+                <option value="80 CP (250 HTG)">80 CP — 250 HTG</option>
+                <option value="420 CP (1200 HTG)">420 CP — 1,200 HTG</option>
+                <option value="880 CP (2300 HTG)">880 CP — 2,300 HTG</option>
+                <option value="2400 CP (5800 HTG)">2,400 CP — 5,800 HTG</option>
+                <option value="5000 CP (11000 HTG)">5,000 CP — 11,000 HTG</option>
+            </select>
+            <input type="text" id="playerId" placeholder="Activision ID" required>
+            <button type="button" class="pay-moncash" onclick="sendWhatsApp('MonCash')">Pay via MonCash</button>
+            <button type="button" class="pay-natcash" onclick="sendWhatsApp('Natcash')">Pay via Natcash</button>
+        </form>
+        <a href="/" class="back">< Return Home</a>
+    </div>
+
+    <script>
+        function sendWhatsApp(method) {
+            const phone = "50912345678"; 
+            const service = document.getElementById('service').value;
+            const id = document.getElementById('playerId').value;
+            const message = `Hello! %0ANew Order: Call of Duty %0APack: ${service}%0AID: ${id}%0AMethod: ${method}`;
+            window.location.href = `https://wa.me/${phone}?text=${message}`;
+        }
+    </script>
+</body>
+</html>
